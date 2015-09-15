@@ -112,7 +112,7 @@ OPTLEVEL=2
 # one of the valid "-c PROGRAMMER-ID" values 
 # described in the avrdude info page.
 # 
-AVRDUDE_PROGRAMMERID=stk500v2
+AVRDUDE_PROGRAMMERID=avrisp
 
 # port--serial or parallel port to which your 
 # hardware programmer is attached
@@ -218,9 +218,9 @@ hex: $(HEXTRG)
 
 
 writeflash: hex
-	$(AVRDUDE) -c $(AVRDUDE_PROGRAMMERID)   \
+	$(AVRDUDE) -v -c $(AVRDUDE_PROGRAMMERID)  \
 	 -p $(PROGRAMMER_MCU) -P $(AVRDUDE_PORT) -e        \
-	 -U flash:w:$(HEXROMTRG)
+	 -b 19200 -U flash:w:$(HEXROMTRG)
 
 install: writeflash
 
